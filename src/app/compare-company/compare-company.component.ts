@@ -12,6 +12,31 @@ export class CompareCompanyComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
+  //plot 1
+  public lineChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };  
+  public lineChartLabels = [];
+  public lineChartType = 'line';
+  public lineChartLegend = true;  
+  public lineChartData = [
+    {data: <any>[], label: 'Company 1'}
+  ];
+
+  //plot 2
+  public lineChartOptions2 = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };  
+  public lineChartLabels2 = [];
+  public lineChartType2 = 'line';
+  public lineChartLegend2 = true;  
+  public lineChartData2 = [
+    {data: [], label: 'Company 2'}
+  ];
+
+
   companies: any;
   stockExchanges: any;
 
@@ -91,6 +116,21 @@ export class CompareCompanyComponent implements OnInit {
       {
         company2.stockprices = data;
         console.log(company2)
+
+        
+        for(let s of company1.stockprices){
+          this.lineChartLabels.push(s.date);
+          this.lineChartData[0].data.push(s.price);
+        }
+
+        for(let s of company2.stockprices){
+          this.lineChartLabels2.push(s.date);
+          this.lineChartData2[0].data.push(s.price);
+        }
+
+        console.log(this.lineChartLabels);
+        console.log(this.lineChartData);
+
       });
     });
 

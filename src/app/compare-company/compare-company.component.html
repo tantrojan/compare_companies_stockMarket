@@ -47,6 +47,24 @@
           </div>
        </form>
         <button (click)="getStocks()" type="button" class="btn btn-primary">Generate Chart</button>
+        <div>
+          <div style="display: block">
+            <canvas baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType">
+            </canvas>
+            <canvas baseChart
+                    [datasets]="lineChartData2"
+                    [labels]="lineChartLabels2"
+                    [options]="lineChartOptions2"
+                    [legend]="lineChartLegend2"
+                    [chartType]="lineChartType2">
+            </canvas>
+          </div>
+        </div>
       </div>
       
     </div>

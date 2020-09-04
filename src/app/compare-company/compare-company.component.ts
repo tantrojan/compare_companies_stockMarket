@@ -5,7 +5,7 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 @Component({
   selector: 'app-compare-company',
   templateUrl: './compare-company.component.html',
-  styleUrls: ['./compare-company.component.css','../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css']
+  styleUrls: ['./compare-company.component.css']
 })
 
 export class CompareCompanyComponent implements OnInit {

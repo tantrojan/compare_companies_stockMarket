@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 
@@ -14,7 +13,7 @@ import { CompareCompanyComponent } from './compare-company/compare-company.compo
     CompareCompanyComponent
   ],
   imports: [
-    BrowserModule,HttpClientModule,BsDatepickerModule.forRoot(),FormsModule,
+    BrowserModule,HttpClientModule,FormsModule,
     ReactiveFormsModule,ChartsModule
   ],
   providers: [],

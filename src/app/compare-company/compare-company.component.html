@@ -41,9 +41,9 @@
         <form [formGroup]="dateForm">
           <div class="form-group">
             <label for="fromDate">From Date</label>
-            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="fromDate" formControlName="fromDate" ngModel>
+            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="fromDate" formControlName="fromDate">
             <label for="toDate">From Date</label>
-            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="toDate" formControlName="toDate" ngModel>
+            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="toDate" formControlName="toDate">
           </div>
        </form>
         <button (click)="getStocks()" type="button" class="btn btn-primary">Generate Chart</button>

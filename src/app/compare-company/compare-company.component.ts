@@ -66,6 +66,13 @@ export class CompareCompanyComponent implements OnInit {
   }
 
   getStocks(): void {
+
+    this.lineChartData[0].data = [];
+    this.lineChartLabels = [];
+
+    this.lineChartData2[0].data = [];
+    this.lineChartLabels2 = [];
+
     let companySelect1 = this.companyForm1.get('companySelect1').value;
     let stockExchangeSelect1 = this.companyForm1.get('stockExchangeSelect1').value;
 

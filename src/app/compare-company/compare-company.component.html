@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="row">
+          <form [formGroup]="companyForm1" >
+              <h1>Company 1</h1>
+              <div class="form-group">
+                <label for="companySelect1">Select Company</label>
+                <select class="form-control" id="companySelect1" formControlName="companySelect1">
+                  <option *ngFor="let company of companies" value={{company.company_name}}>{{company.company_name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label for="stockExchangeSelect1">Select StockExchange</label>
+                  <select class="form-control" id="stockExchangeSelect1" formControlName="stockExchangeSelect1">
+                    <option *ngFor="let stockExchange of stockExchanges" value={{stockExchange.brief}}>{{stockExchange.brief}}</option>
+                  </select>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+          <form [formGroup]="companyForm2" >
+            <h1>Company 2</h1>
+            <div class="form-group">
+              <label for="companySelect2">Select Company</label>
+              <select class="form-control" id="companySelect2" formControlName="companySelect2">
+                <option *ngFor="let company of companies" value={{company.company_name}}>{{company.company_name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="stockExchangeSelect2">Select StockExchange</label>
+                <select class="form-control" id="stockExchangeSelect2" formControlName="stockExchangeSelect2">
+                  <option *ngFor="let stockExchange of stockExchanges" value={{stockExchange.brief}}>{{stockExchange.brief}}</option>
+                </select>
+              </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm">
+        <h1>Comparison Chart</h1>
+        <form [formGroup]="dateForm">
+          <div class="form-group">
+            <label for="fromDate">From Date</label>
+            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="fromDate" formControlName="fromDate" ngModel>
+            <label for="toDate">From Date</label>
+            <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="toDate" formControlName="toDate" ngModel>
+          </div>
+       </form>
+        <button (click)="getStocks()" type="button" class="btn btn-primary">Generate Chart</button>
+      </div>
+      
+    </div>
+  </div>
+
+

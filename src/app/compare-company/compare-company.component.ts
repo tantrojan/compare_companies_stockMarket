@@ -12,7 +12,7 @@ export class CompareCompanyComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
-  //plot 1
+  //plot
   public lineChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -21,20 +21,10 @@ export class CompareCompanyComponent implements OnInit {
   public lineChartType = 'line';
   public lineChartLegend = true;  
   public lineChartData = [
-    {data: <any>[], label: 'Company 1'}
+    {data: <any>[], label: 'Company 1'},
+    {data: <any>[], label: 'Company 2'}
   ];
 
-  //plot 2
-  public lineChartOptions2 = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };  
-  public lineChartLabels2 = [];
-  public lineChartType2 = 'line';
-  public lineChartLegend2 = true;  
-  public lineChartData2 = [
-    {data: [], label: 'Company 2'}
-  ];
 
 
   companies: any;
@@ -70,8 +60,6 @@ export class CompareCompanyComponent implements OnInit {
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
 
-    this.lineChartData2[0].data = [];
-    this.lineChartLabels2 = [];
 
     let companySelect1 = this.companyForm1.get('companySelect1').value;
     let stockExchangeSelect1 = this.companyForm1.get('stockExchangeSelect1').value;
@@ -115,28 +103,59 @@ export class CompareCompanyComponent implements OnInit {
     resp.subscribe((data)=>
     {
       company1.stockprices = data;
-      console.log(company1);
+      // console.log(company1);
 
       let resp2 = this.http.get("http://localhost:8080/getstockprice/"+company2.id+"/"+fromDate+"/"+toDate+"/"+company2.exchange);
 
       resp2.subscribe((data)=>
       {
         company2.stockprices = data;
-        console.log(company2)
+        // console.log(company2)
 
-        
+        let dates = new Set();
+        let avg1=0,avg2=0;
+
         for(let s of company1.stockprices){
-          this.lineChartLabels.push(s.date);
-          this.lineChartData[0].data.push(s.price);
+          dates.add(s.date);
+          avg1+=s.price;
         }
+        if(company1.stockprices.length>0)
+          avg1=avg1/company1.stockprices.length;
 
         for(let s of company2.stockprices){
-          this.lineChartLabels2.push(s.date);
-          this.lineChartData2[0].data.push(s.price);
+          dates.add(s.date);
+          avg2+=s.price;
         }
 
-        console.log(this.lineChartLabels);
-        console.log(this.lineChartData);
+        if(company2.stockprices.length>0)
+          avg2=avg2/company2.stockprices.length;
+
+        let datesArray = [...dates];
+        datesArray.sort();
+
+        let prices1 = [], prices2 = []
+
+        for(let date of datesArray)
+        {
+          let x = company1.stockprices.find((s)=>{return s.date===date});
+          if(typeof x === 'undefined')
+            x=avg1;
+          else
+            x=x.price;
+          prices1.push(x);
+
+          let y = company2.stockprices.find((s)=>{return s.date===date});
+          if(typeof y === 'undefined')
+            y=avg2;
+          else
+            y=y.price;
+          prices2.push(y);
+          
+        }
+
+        this.lineChartLabels = datesArray;
+        this.lineChartData[0].data = prices1;
+        this.lineChartData[1].data = prices2;
 
       });
     });
